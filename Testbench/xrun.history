@@ -1,0 +1,84 @@
+#e1(20Aug2025:17:44:19): source ./xcelium.d/env.d/env.history.20Aug2025_17_44_19
+s1(20Aug2025:17:44:19):  xrun -sv bmu_interface.sv 
+#e2(20Aug2025:19:18:32): source ./xcelium.d/env.d/env.history.20Aug2025_19_18_32
+s2(20Aug2025:19:18:32):  xrun -sv bmu_sequence_item.sv 
+#e3(20Aug2025:19:21:05): source ./xcelium.d/env.d/env.history.20Aug2025_19_21_05
+s3(20Aug2025:19:21:05):  xrun -sv bmu_sequence_item.sv 
+#e4(20Aug2025:19:23:07): source ./xcelium.d/env.d/env.history.20Aug2025_19_23_07
+s4(20Aug2025:19:23:07):  xrun -sv bmu_sequence_item.sv 
+#e5(20Aug2025:19:24:00): source ./xcelium.d/env.d/env.history.20Aug2025_19_24_00
+s5(20Aug2025:19:24:00):  xrun -sv bmu_sequence_item.sv 
+#e6(20Aug2025:19:27:15): source ./xcelium.d/env.d/env.history.20Aug2025_19_27_15
+s6(20Aug2025:19:27:15):  xrun -uvm bmu_sequence_item.sv 
+#e7(20Aug2025:21:06:08): source ./xcelium.d/env.d/env.history.20Aug2025_21_06_08
+s7(20Aug2025:21:06:08):  xrun -uvm bmu_subscriber.sv 
+#e8(20Aug2025:21:07:18): source ./xcelium.d/env.d/env.history.20Aug2025_21_07_18
+s8(20Aug2025:21:07:18):  xrun -uvm bmu_subscriber.sv 
+#e9(20Aug2025:21:12:15): source ./xcelium.d/env.d/env.history.20Aug2025_21_12_15
+s9(20Aug2025:21:12:15):  xrun -uvm bmu_subscriber.sv 
+#e10(20Aug2025:21:13:30): source ./xcelium.d/env.d/env.history.20Aug2025_21_13_30
+s10(20Aug2025:21:13:30):  xrun -uvm bmu_subscriber.sv 
+#e11(20Aug2025:21:14:13): source ./xcelium.d/env.d/env.history.20Aug2025_21_14_13
+s11(20Aug2025:21:14:13):  xrun -uvm bmu_subscriber.sv 
+#e12(20Aug2025:21:16:19): source ./xcelium.d/env.d/env.history.20Aug2025_21_16_19
+s12(20Aug2025:21:16:19):  xrun -uvm bmu_subscriber.sv 
+#e13(20Aug2025:21:16:40): source ./xcelium.d/env.d/env.history.20Aug2025_21_16_40
+s13(20Aug2025:21:16:40):  xrun -uvm bmu_subscriber.sv 
+#e14(20Aug2025:21:16:54): source ./xcelium.d/env.d/env.history.20Aug2025_21_16_54
+s14(20Aug2025:21:16:54):  xrun -uvm bmu_subscriber.sv 
+#e15(20Aug2025:21:21:54): source ./xcelium.d/env.d/env.history.20Aug2025_21_21_54
+s15(20Aug2025:21:21:54):  xrun -uvm bmu_subscriber.sv 
+#e16(20Aug2025:21:24:29): source ./xcelium.d/env.d/env.history.20Aug2025_21_24_29
+s16(20Aug2025:21:24:29):  xrun -uvm bmu_subscriber.sv 
+#e17(20Aug2025:22:22:37): source ./xcelium.d/env.d/env.history.20Aug2025_22_22_37
+s17(20Aug2025:22:22:37):  xrun -uvm bmu_scoreboard.sv 
+#e18(20Aug2025:22:25:50): source ./xcelium.d/env.d/env.history.20Aug2025_22_25_50
+s18(20Aug2025:22:25:50):  xrun -uvm bmu_scoreboard.sv 
+#e19(20Aug2025:22:26:52): source ./xcelium.d/env.d/env.history.20Aug2025_22_26_52
+s19(20Aug2025:22:26:52):  xrun -uvm bmu_scoreboard.sv 
+#e20(20Aug2025:22:53:35): source ./xcelium.d/env.d/env.history.20Aug2025_22_53_35
+s20(20Aug2025:22:53:35):  xrun -uvm +incdir+/home/Trainee11/nadia/BMU_Proj/rtl_package +incdir+/home/Trainee11/nadia/BMU_Proj/Testbench bmu_scoreboard.sv 
+#e21(20Aug2025:23:02:11): source ./xcelium.d/env.d/env.history.20Aug2025_23_02_11
+s21(20Aug2025:23:02:11):  xrun -uvm +incdir+/home/Trainee11/nadia/BMU_Proj/rtl_package +incdir+/home/Trainee11/nadia/BMU_Proj/Testbench bmu_scoreboard.sv 
+#e22(21Aug2025:11:30:16): source ./xcelium.d/env.d/env.history.21Aug2025_11_30_16
+s22(21Aug2025:11:30:16):  xrun -uvm bmu_scoreboard.sv 
+#e23(21Aug2025:11:33:20): source ./xcelium.d/env.d/env.history.21Aug2025_11_33_20
+s23(21Aug2025:11:33:20):  xrun -uvm bmu_scoreboard.sv 
+#e24(23Aug2025:18:46:54): source ./xcelium.d/env.d/env.history.23Aug2025_18_46_54
+s24(23Aug2025:18:46:54):  xrun -uvm bmu_scoreboard.sv 
+#e25(23Aug2025:19:03:19): source ./xcelium.d/env.d/env.history.23Aug2025_19_03_19
+s25(23Aug2025:19:03:19):  xrun -uvm bmu_interface.sv 
+#e26(23Aug2025:21:28:33): source ./xcelium.d/env.d/env.history.23Aug2025_21_28_33
+s26(23Aug2025:21:28:33):  xrun -uvm bmu_scoreboard.sv 
+#e27(23Aug2025:21:29:43): source ./xcelium.d/env.d/env.history.23Aug2025_21_29_43
+s27(23Aug2025:21:29:43):  xrun -uvm bmu_scoreboard.sv 
+#e28(24Aug2025:09:27:10): source ./xcelium.d/env.d/env.history.24Aug2025_09_27_10
+s28(24Aug2025:09:27:10):  xrun bmu_scoreboard.sv 
+#e29(24Aug2025:09:30:02): source ./xcelium.d/env.d/env.history.24Aug2025_09_30_02
+s29(24Aug2025:09:30:02):  xrun -uvm bmu_scoreboard.sv 
+#e30(24Aug2025:09:30:11): source ./xcelium.d/env.d/env.history.24Aug2025_09_30_11
+s30(24Aug2025:09:30:11):  xrun -uvm bmu_scoreboard.sv 
+#e31(24Aug2025:09:31:00): source ./xcelium.d/env.d/env.history.24Aug2025_09_31_00
+s31(24Aug2025:09:31:00):  xrun -uvm bmu_scoreboard.sv 
+#e32(24Aug2025:09:35:31): source ./xcelium.d/env.d/env.history.24Aug2025_09_35_31
+s32(24Aug2025:09:35:31):  xrun -uvm bmu_scoreboard.sv 
+#e33(24Aug2025:09:45:33): source ./xcelium.d/env.d/env.history.24Aug2025_09_45_33
+s33(24Aug2025:09:45:33):  xrun -uvm bmu_agent.sv 
+#e34(24Aug2025:09:46:09): source ./xcelium.d/env.d/env.history.24Aug2025_09_46_09
+s34(24Aug2025:09:46:09):  xrun -uvm bmu_agent.sv 
+#e35(24Aug2025:09:48:05): source ./xcelium.d/env.d/env.history.24Aug2025_09_48_05
+s35(24Aug2025:09:48:05):  xrun -uvm bmu_agent.sv 
+#e36(24Aug2025:09:48:27): source ./xcelium.d/env.d/env.history.24Aug2025_09_48_27
+s36(24Aug2025:09:48:27):  xrun -uvm bmu_agent.sv 
+#e37(24Aug2025:10:18:14): source ./xcelium.d/env.d/env.history.24Aug2025_10_18_14
+s37(24Aug2025:10:18:14):  xrun bmu_agent.sv 
+#e38(24Aug2025:10:19:42): source ./xcelium.d/env.d/env.history.24Aug2025_10_19_42
+s38(24Aug2025:10:19:42):  xrun bmu_agent.sv 
+#e39(24Aug2025:10:19:51): source ./xcelium.d/env.d/env.history.24Aug2025_10_19_51
+s39(24Aug2025:10:19:51):  xrun -uvm bmu_agent.sv 
+#e40(24Aug2025:10:20:19): source ./xcelium.d/env.d/env.history.24Aug2025_10_20_19
+s40(24Aug2025:10:20:19):  xrun -uvm bmu_agent.sv 
+#e41(24Aug2025:10:21:01): source ./xcelium.d/env.d/env.history.24Aug2025_10_21_01
+s41(24Aug2025:10:21:01):  xrun -uvm bmu_agent.sv 
+#e42(01Sep2025:12:02:38): source ./xcelium.d/env.d/env.history.01Sep2025_12_02_38
+s42(01Sep2025:12:02:38):  xrun -uvm Tob_Testbench.sv 
