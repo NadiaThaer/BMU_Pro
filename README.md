@@ -183,7 +183,7 @@ Three bugs were found and reported during the verification process:
 **Example:**
 - Input A: `0xFFFFFFFF` → Expected: `0x00000020` (32) | Actual: `0x00000010` (16) ❌
 
-![CPOP Bug](imagebug1.png)
+![CPOP Bug](CPOPBUG.png)
 
 ---
 
