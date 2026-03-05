@@ -172,42 +172,175 @@ A comprehensive set of corner cases were defined and tested, including:
 
 ## 🐛 Bugs Discovered
 
-Three bugs were found and reported during the verification process:
+**6 bugs** were found, reported, and tracked via ClickUp during the verification process.
+
+| # | Bug | Severity | Status | Component |
+|---|-----|----------|--------|-----------|
+| 1 | CPOP — Incorrect Bit Count | 🔴 High | Open | BitManip Unit |
+| 2 | PACK — Incorrect Operand Order | 🔴 High | Open | BitManip Unit |
+| 3 | SLT/SLTU — Incorrect Result | 🔴 High | Open | RTL |
+| 4 | CTZ — Off-By-One Error | 🔴 High | Open | RTL, BitManip Unit |
+| 5 | MAX — Wrong Operation Performed | 🔴 Critical | Open | BMU |
+| 6 | ORN — b_in Not Inverted (ZBB) | 🔴 High | Open | BMU |
 
 ---
 
-### Bug 1 — CPOP Instruction: Incorrect Bit Count
+### 🐛 Bug 1 — CPOP Instruction: Incorrect Bit Count
+
+| Field | Detail |
+|-------|--------|
+| **Component** | BitManip Unit (BMU) |
+| **Priority** | High |
+| **Affects** | v1.1 |
 
 **Summary:** CPOP counts only the lower 16 bits of the operand instead of all 32 bits as required by the RISC-V BitManip specification.
 
-**Example:**
-- Input A: `0xFFFFFFFF` → Expected: `0x00000020` (32) | Actual: `0x00000010` (16) ❌
+**Failing Test Cases:**
 
-![CPOP Bug](CPOPBUG.png)
+| Input A | Expected | Actual | Status |
+|---------|----------|--------|--------|
+| `0xFFFFFFFF` | `0x00000020` (32) | `0x00000010` (16) | ❌ FAIL |
+| `0x00000004` | `0x00000001` (1) | `0x00000001` (1) | ✅ PASS |
+
+**Root Cause:** The population count logic only evaluates `a_in[15:0]` and ignores the upper 16 bits.
+
+![CPOP Bug](imagebug1.png)
 
 ---
 
-### Bug 2 — PACK Operation: Incorrect Operand Order
+### 🐛 Bug 2 — PACK Operation: Incorrect Operand Order
 
-**Summary:** The PACK instruction uses incorrect operand order in bit field concatenation. The DUT concatenates operands as `{A[15:0], B[15:0]}` instead of the correct `{B[15:0], A[15:0]}`.
+| Field | Detail |
+|-------|--------|
+| **Component** | BitManip Unit (BMU) |
+| **Priority** | High |
 
-**Example:**
-- Input A: `0x00001234`, Input B: `0x00005678`
-- Expected: `0x56781234` | Actual: `0x12345678` ❌
+**Summary:** The PACK instruction uses the wrong operand order in bit field concatenation. The DUT concatenates as `{A[15:0], B[15:0]}` instead of the correct `{B[15:0], A[15:0]}`.
+
+**Failing Test Cases:**
+
+| Input A | Input B | Expected | Actual | Status |
+|---------|---------|----------|--------|--------|
+| `0x00001234` | `0x00005678` | `0x56781234` | `0x12345678` | ❌ FAIL |
+| `0x0000AAAA` | `0x0000BBBB` | `0xBBBBAAAA` | `0xAAAABBBB` | ❌ FAIL |
+
+**Root Cause:** The RTL concatenation expression has operand A and B swapped.
 
 ![PACK Bug](imagebug2.png)
 
 ---
 
-### Bug 3 — SLT/SLTU Operations: Incorrect Result
+### 🐛 Bug 3 — SLT/SLTU Operations: Incorrect Result
 
-**Summary:** The SLT (Set Less Than) and SLTU (Set Less Than Unsigned) operations return the value of `b_in` (or `b_in + 1`) instead of the expected boolean result (`0x00000000` or `0x00000001`). This indicates severe bus contention in the result multiplexing logic.
+| Field | Detail |
+|-------|--------|
+| **Component** | RTL |
+| **Priority** | High |
 
-**Example:**
-- Input A: `0x00000001`, Input B: `0x2f4e72a1`
-- Expected: `0x00000001` | Actual: `0x2f4e72a1` ❌
+**Summary:** SLT (Set Less Than) and SLTU (Set Less Than Unsigned) return the value of `b_in` or `b_in + 1` instead of the expected boolean `0` or `1`. Indicates severe bus contention in the result multiplexing logic.
+
+**Failing Test Cases:**
+
+| Operation | Input A | Input B | Expected | Actual | Status |
+|-----------|---------|---------|----------|--------|--------|
+| SLT | `0x00000001` | `0x2f4e72a1` | `0x00000001` | `0x2f4e72a1` | ❌ FAIL |
+| SLT | `0x2291ca68` | `0x27c12448` | `0x00000001` | `0x27c12449` | ❌ FAIL |
+
+**Root Cause:** Bus contention in the result mux — `b_in` leaks into the output path instead of the comparison result.
 
 ![SLT Bug](imagebug3.png)
+
+---
+
+### 🐛 Bug 4 — CTZ: Off-By-One Error
+
+| Field | Detail |
+|-------|--------|
+| **Component** | RTL, BitManip Unit (BMU) |
+| **Priority** | High |
+| **Affects** | v1.1 |
+| **Tracked in** | ClickUp — BMU_Project |
+
+**Summary:** The CTZ (Count Trailing Zeros) instruction produces a result that is off by one for a specific, reproducible class of inputs. The failure is systematic — not random — indicating a logical flaw in the counter's termination condition.
+
+**Failing Test Cases (Pattern A):**
+
+| Input A | Expected | Actual | Status |
+|---------|----------|--------|--------|
+| `0xFFFFFFFE` | `0x1` (1) | `0x0` (0) | ❌ FAIL |
+| `0xFFFFFFE0` | `0x5` (5) | `0x4` (4) | ❌ FAIL |
+| `0x00000001` | `0x0` (0) | `0x1` (1) | ❌ FAIL |
+
+**Passing Test Cases (Pattern B):**
+
+| Input A | Expected | Actual | Status |
+|---------|----------|--------|--------|
+| `0x0F000000` | `0x18` (24) | `0x18` (24) | ✅ PASS |
+| `0x00000000` | `0x20` (32) | `0x20` (32) | ✅ PASS |
+
+**Root Cause (Black-Box Analysis):** Off-by-one error in the internal counting algorithm. The state machine or counter logic has a faulty final adjustment/termination condition for inputs where the least-significant set bit is isolated (not part of a contiguous group).
+
+![CTZ Bug](imagebug4.png)
+
+---
+
+### 🐛 Bug 5 — MAX Operation: Wrong Operation Performed
+
+| Field | Detail |
+|-------|--------|
+| **Component** | Bit Manipulation Unit (BMU) |
+| **Priority** | 🔴 Critical |
+| **Tracked in** | ClickUp — BMU_Project |
+
+**Summary:** The MAX operation does not perform a comparison at all. Instead, the DUT either performs addition (A+B) or returns the minimum value. The `ap.sub` signal incorrectly overrides the MAX logic.
+
+**Failing Test Cases:**
+
+| Test | Input A | Input B | Expected | Actual | Root Cause |
+|------|---------|---------|----------|--------|-----------|
+| TC1 | `0x0000000A` (10) | `0x00000014` (20) | `0x00000014` (20) | `0x0000001E` (30) | A+B performed |
+| TC2 | `0x00000005` (5) | `0x00000003` (3) | `0x00000005` (5) | `0x00000003` (3) | MIN returned |
+
+**Root Cause:**
+- `ap.sub` incorrectly overrides the MAX selection logic
+- Comparison logic is inverted or missing entirely
+- No proper handling for the `ap.max && ap.sub` control signal combination
+
+**Required Fix:**
+- Review operation decoder in BMU RTL
+- Add correct comparison logic for `ap.max && ap.sub`
+- Ensure signed & unsigned comparison handling
+- Verify fix with extended test suite
+
+![MAX Bug](imagebug5.png)
+
+---
+
+### 🐛 Bug 6 — ORN Operation: b_in Not Inverted When ZBB Mode Active
+
+| Field | Detail |
+|-------|--------|
+| **Component** | Bit Manipulation Unit (BMU) |
+| **Priority** | High |
+| **Tracked in** | ClickUp — BMU_Project |
+
+**Summary:** When `ap.zbb = 1` and `ap.lor = 1`, the DUT should perform `a_in | ~b_in` (ORN — OR-Not). Instead, it performs a standard `a_in | b_in`, violating the RISC-V Zbb extension specification.
+
+**Steps to Reproduce:**
+1. Set `ap.lor = 1`
+2. Set `ap.zbb = 1` (to enable ORN mode per spec)
+3. Apply non-zero inputs to `a_in` and `b_in`
+4. Observe output `result`
+
+**Failing Test Case:**
+
+| Input A | Input B | Expected (`A \| ~B`) | Actual (`A \| B`) | Status |
+|---------|---------|----------------------|-------------------|--------|
+| `0x0F0F0F0F` | `0xF0F0F0F0` | `0x0F0F0F0F` | `0xFFFFFFFF` | ❌ FAIL |
+
+**Root Cause:** The RTL does not include the inversion of `b_in` when `ap.zbb` is asserted. The code uses `b_in` directly instead of `~b_in`.
+
+![ORN Bug](imagebug6.png)
 
 ---
 
@@ -231,7 +364,8 @@ Three bugs were found and reported during the verification process:
 |--------|--------|
 | Code Coverage | 100% (all RTL lines and branches) |
 | Functional Coverage | 100% (all operations and scenarios) |
-| High/Medium Severity Bugs | Zero remaining |
+| Bugs Discovered | 6 total (all tracked in ClickUp) |
+| High/Medium Severity Bugs Remaining | Target: Zero after fixes |
 | Regression Pass Rate | > 98% |
 | Documentation | Complete — all verification artifacts delivered |
 
