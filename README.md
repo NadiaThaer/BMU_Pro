@@ -174,6 +174,8 @@ A comprehensive set of corner cases were defined and tested, including:
 
 **6 bugs** were found, reported, and tracked via ClickUp during the verification process.
 
+> 📋 **Full Bug Report (ClickUp):** [View All Bugs → BMU_Project Board](https://sharing.clickup.com/90181656902/l/h/6-901810939831-1/ea2f38f02df910d)
+
 | # | Bug | Severity | Status | Component |
 |---|-----|----------|--------|-----------|
 | 1 | CPOP — Incorrect Bit Count | 🔴 High | Open | BitManip Unit |
@@ -204,7 +206,6 @@ A comprehensive set of corner cases were defined and tested, including:
 
 **Root Cause:** The population count logic only evaluates `a_in[15:0]` and ignores the upper 16 bits.
 
-![CPOP Bug](imagebug1.png)
 
 ---
 
@@ -226,7 +227,6 @@ A comprehensive set of corner cases were defined and tested, including:
 
 **Root Cause:** The RTL concatenation expression has operand A and B swapped.
 
-![PACK Bug](imagebug2.png)
 
 ---
 
@@ -248,7 +248,6 @@ A comprehensive set of corner cases were defined and tested, including:
 
 **Root Cause:** Bus contention in the result mux — `b_in` leaks into the output path instead of the comparison result.
 
-![SLT Bug](imagebug3.png)
 
 ---
 
@@ -280,7 +279,6 @@ A comprehensive set of corner cases were defined and tested, including:
 
 **Root Cause (Black-Box Analysis):** Off-by-one error in the internal counting algorithm. The state machine or counter logic has a faulty final adjustment/termination condition for inputs where the least-significant set bit is isolated (not part of a contiguous group).
 
-![CTZ Bug](imagebug4.png)
 
 ---
 
@@ -312,7 +310,6 @@ A comprehensive set of corner cases were defined and tested, including:
 - Ensure signed & unsigned comparison handling
 - Verify fix with extended test suite
 
-![MAX Bug](imagebug5.png)
 
 ---
 
@@ -340,7 +337,6 @@ A comprehensive set of corner cases were defined and tested, including:
 
 **Root Cause:** The RTL does not include the inversion of `b_in` when `ap.zbb` is asserted. The code uses `b_in` directly instead of `~b_in`.
 
-![ORN Bug](imagebug6.png)
 
 ---
 
